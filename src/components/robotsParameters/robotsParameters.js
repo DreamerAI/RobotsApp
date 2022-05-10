@@ -61,9 +61,8 @@ function RobotsParameters({ setCurrentMenu, values, valueList }) {
   const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
   const [dater, setDater] = useState(current);
 
-  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+  const DateInput = forwardRef(({ value, onClick }, ref) => (
     <button className="btn-logo" onClick={onClick} ref={ref}>
-      {value}
       <img src={callendarLogo} alt="callendarLogo" />
     </button>
   ));
@@ -103,7 +102,7 @@ function RobotsParameters({ setCurrentMenu, values, valueList }) {
             selected={dater}
             dateFormat="dd/MM/yyyy"
             onChange={(dater) => setDater(dater)}
-            customInput={<ExampleCustomInput />}
+            customInput={<DateInput />}
           />
         </div>
         <div className="history-content">
@@ -180,6 +179,8 @@ function RobotsParameters({ setCurrentMenu, values, valueList }) {
 
         <div className="function-graph">
           <p>График Функции</p>
+          <GraphJs />
+          <GraphJs />
           <GraphJs />
         </div>
       </div>

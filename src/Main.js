@@ -5,6 +5,7 @@ import RobotsParameters from './components/robotsParameters/robotsParameters.js'
 import './Main.css';
 import { useState, useEffect, useRef } from 'react';
 
+// Timer of Robots
 function Timer({ seconds, setTimerIsActive, addValueList, clearCircles }) {
   const [timeLeft, setTimeLeft] = useState(seconds);
   const intervalRef = useRef(); // Add a ref to store the interval id
@@ -100,8 +101,6 @@ function Main() {
 
     // let radius = minCircle + Math.random() * (maxCircle - minCircle);
     let radius = diameter / 2;
-
-    // define random distance between inner/outer rings
 
     // let distFromCenter = radius + Math.random() * (outerRadius - innerRadius - radius * 2);
     let distFromCenter = radius + Math.random() * (maxRadius - radius * 2);

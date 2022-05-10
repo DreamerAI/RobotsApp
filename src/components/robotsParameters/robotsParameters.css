@@ -116,6 +116,8 @@
 }
 .function-graph {
   grid-area: function-Graph;
+  max-height: 470px;
+  overflow-y: auto;
 }
 .datepicker-input {
   float: right;
