@@ -50,6 +50,9 @@ function RobotsSettings({
   setrobotsQnt,
   clearCircles,
 }) {
+  function getRandomInt(max) {
+    alert(Math.floor(Math.random() * max));
+  }
   return (
     <div className="setting-menu">
       <form action="#">
@@ -159,6 +162,7 @@ function RobotsSettings({
                   event.preventDefault();
                   setTimerIsActive(() => false);
                   clearCircles();
+                  getRandomInt(360);
                 }}>
                 <span>Сбросить</span>
               </button>
