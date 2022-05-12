@@ -10,11 +10,13 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
+// ПЕРЕД ИСПОЛЬЗОВАНИЕМ ПОЧИТАТЬ ПРО БИБЛИОТЕКУ RECHARTS
+
 const data = [
   {
     name: 'Page A',
-    uv: 2000,
-    pv: 1400,
+    uv: 100,
+    pv: 500,
     amt: 1000,
   },
   {
@@ -26,7 +28,7 @@ const data = [
   {
     name: 'Page C',
     uv: 2000,
-    pv: 9800,
+    pv: 7800,
     amt: 2290,
   },
   {

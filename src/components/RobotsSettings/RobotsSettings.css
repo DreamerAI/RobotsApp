@@ -1,12 +1,12 @@
 .setting-menu {
   background: #ffffff;
-  border: 2px solid #0071FF;
+  border: 2px solid #0071ff;
   padding: 9% 37px;
   border-radius: 15px;
   box-sizing: border-box;
 }
 .container {
-  border-bottom: 1px solid #DEDEDE;
+  border-bottom: 1px solid #dedede;
   padding-bottom: 2%;
   box-sizing: border-box;
 }
@@ -31,7 +31,7 @@
 }
 .input-header {
   font-size: 1.2em;
-  border: 1px solid #DEDEDE;
+  border: 1px solid #dedede;
   margin: 0;
   padding: 9px 0px 9px 10px;
   border-radius: 0.4rem;
@@ -40,7 +40,7 @@
 .input__text {
   justify-self: start;
   opacity: 0.5;
-  color: #2E2E2E;
+  color: #2e2e2e;
   margin: 1% 0 0px 0;
   font-size: 1em;
 }
@@ -49,7 +49,7 @@
 }
 .input-area input[type='number'] {
   font-size: 1em;
-  border: 1px solid #DEDEDE;
+  border: 1px solid #dedede;
   margin: 0;
   padding: 12px 35px 12px 10px;
   border-radius: 0.4rem;
@@ -76,12 +76,12 @@
   display: none;
 }
 .robots_type_button input[type='radio']:checked + label {
-  background: #0071FF;
+  background: #0071ff;
   color: white;
 }
 .robots_type_button input[type='radio'] + label {
   background: #efefef;
-  color: #0071FF;
+  color: #0071ff;
 }
 .input-area {
   display: grid;
@@ -126,7 +126,7 @@
   background: transparent;
   width: 40px;
   height: 40px;
-  color: #0071FF;
+  color: #0071ff;
   font-weight: bold;
   font-size: 1.4em;
 }
@@ -142,14 +142,14 @@
   margin-left: 7%;
   text-align: center;
   background: #f2f2f2;
-  border: 1px solid #DEDEDE;
+  border: 1px solid #dedede;
   border-radius: 3px;
   font-weight: bold;
   justify-self: center;
   align-self: center;
 }
 .btn-counter:hover {
-  background: #0071FF;
+  background: #0071ff;
 }
 .count-btn {
   display: inline-flex;
@@ -180,10 +180,10 @@
   cursor: pointer;
 }
 .btn-submit button {
-  background-color: #0071FF;
+  background-color: #0071ff;
   border: 1px solid transparent;
 }
 .btn-reset button {
-  color: #0071FF;
-  border: 1px solid #0071FF;
+  color: #0071ff;
+  border: 1px solid #0071ff;
 }

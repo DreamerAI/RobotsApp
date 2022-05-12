@@ -10,7 +10,7 @@
   grid-template-areas: 'History Parameters';
 }
 .param-container {
-  border: 2px solid #0071FF;
+  border: 2px solid #0071ff;
   padding: 30px 30px;
   border-radius: 15px;
   background: #ffffff;
@@ -68,7 +68,7 @@
   outline: none;
 }
 .history-list {
-  color: #0071FF;
+  color: #0071ff;
 }
 .history-list-header {
   color: #2e2e2e;

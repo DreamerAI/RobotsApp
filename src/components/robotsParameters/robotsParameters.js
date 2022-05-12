@@ -7,7 +7,7 @@ import settingsLogo from './Group.svg';
 import DatePicker from 'react-datepicker';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState, Fragment, forwardRef } from 'react';
+import { useState, forwardRef } from 'react';
 
 import './robotsParameters.css';
 
@@ -20,6 +20,7 @@ function LaunchResults({
   launchSimulation,
   setParamValue,
 }) {
+  // Вывод данных запуска
   function showedValue() {
     setParamValue('diameter', launchDiameter);
     setParamValue('friction', launchFriction);
@@ -47,7 +48,7 @@ function ValueContainer({ valueName, valueUnit, valueClass, values }) {
   );
 }
 
-function RobotsParameters({ setCurrentMenu, values, valueList }) {
+function RobotsParameters({ setCurrentMenu, launchList }) {
   const [showedValue, setShowedValue] = useState({
     diameter: 0,
     friction: 0,
@@ -55,8 +56,7 @@ function RobotsParameters({ setCurrentMenu, values, valueList }) {
     simulation: 0,
   });
 
-  const [searchDate, setSearchDate] = useState();
-
+  // Фильтрация по дате
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
   const [dater, setDater] = useState(current);
@@ -67,31 +67,29 @@ function RobotsParameters({ setCurrentMenu, values, valueList }) {
     </button>
   ));
 
-  console.log(dater);
-  // Filtered search
+  // Фильтрация по словам
 
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
   const [searchQuery, setSearchQuery] = useState(query || '');
 
-  const filterPosts = (valueList, query) => {
+  const filterLaunches = (launchList, query) => {
     if (!query) {
-      return valueList;
+      return launchList;
     }
 
-    return valueList.filter((post) => {
+    return launchList.filter((post) => {
       const postName = post.launchName.toLowerCase();
       return postName.includes(query);
     });
   };
 
-  const filteredLaunch = filterPosts(valueList, searchQuery);
+  const filteredLaunch = filterLaunches(launchList, searchQuery);
 
+  // Вывод данных запуска
   function setParamValue(key, newValue) {
     setShowedValue((showedValue) => ({ ...showedValue, [key]: newValue }));
   }
-
-  // getDate Function
 
   return (
     <div className="robots-parameters">
@@ -134,7 +132,6 @@ function RobotsParameters({ setCurrentMenu, values, valueList }) {
                     setParamValue={setParamValue}
                   />
                 ))}
-                <Fragment></Fragment>
               </div>
             </div>
           </div>
@@ -178,9 +175,11 @@ function RobotsParameters({ setCurrentMenu, values, valueList }) {
         />
 
         <div className="function-graph">
-          <p>График Функции</p>
+          <p>График Функции №1</p>
           <GraphJs />
+          <p>График Функции №2</p>
           <GraphJs />
+          <p>График Функции №3</p>
           <GraphJs />
         </div>
       </div>

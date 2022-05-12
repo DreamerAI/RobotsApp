@@ -3,6 +3,8 @@ import SwapperLogo from './SwapperLogo.svg';
 import './RobotsSettings.css';
 
 function NumberInput({ id, label, value, setValue, scaleName, nameAttr }) {
+  // label - Едининица измерения
+  // scaleName - Название инпута
   return (
     <div className="input-area container">
       <div className="input__text">
@@ -48,7 +50,7 @@ function RobotsSettings({
   setTimerIsActive,
   timerIsActive,
   setrobotsQnt,
-  clearCircles,
+  clearRobots,
 }) {
   function getRandomInt(max) {
     alert(Math.floor(Math.random() * max));
@@ -74,7 +76,7 @@ function RobotsSettings({
                 type="text"
                 className="input-header"
                 onChange={(event) => {
-                  setValue('launchName', event.target.value);
+                  setValue('launchName', event.target.value); // Назначение названия запуска
                 }}
                 name="header-name"
               />
@@ -91,7 +93,7 @@ function RobotsSettings({
                   id="radio-1"
                   type="radio"
                   name="radio"
-                  onChange={() => setValue('robotsType', 1)}
+                  onChange={() => setValue('robotsType', 1)} // Назначение типа робота - 1
                 />
                 <label htmlFor="radio-1">Rotators</label>
               </div>
@@ -100,7 +102,7 @@ function RobotsSettings({
                   id="radio-2"
                   type="radio"
                   name="radio"
-                  onChange={() => setValue('robotsType', 2)}
+                  onChange={() => setValue('robotsType', 2)} // Назначение типа робота - 2
                 />
                 <label htmlFor="radio-2">Self-propelled</label>
               </div>
@@ -109,9 +111,9 @@ function RobotsSettings({
 
           <NumberInput
             id="InputDiameter"
-            label="м"
+            label="мм"
             value={values.diameter | 0}
-            setValue={(v) => setValue('diameter', v)}
+            setValue={(v) => setValue('diameter', v)} // Назначение диаметра робота
             scaleName={'Диаметр'}
             nameAttr={'diameter-info'}
           />
@@ -120,7 +122,7 @@ function RobotsSettings({
             id="InputFriction"
             label=""
             value={values.friction | 0}
-            setValue={(v) => setValue('friction', v)}
+            setValue={(v) => setValue('friction', v)} // Назначение коэф.трении робота
             scaleName={'Коэф. трении'}
             nameAttr={'friction-info'}
           />
@@ -129,7 +131,7 @@ function RobotsSettings({
             id="InputRobotsQnt"
             label="шт"
             value={values.robotsQnt | 0}
-            setValue={(v) => setValue('robotsQnt', v)}
+            setValue={(v) => setValue('robotsQnt', v)} // Назначение кол-во роботов
             scaleName={'Кол-во роботов'}
             nameAttr={'robotsQnt-info'}
           />
@@ -138,7 +140,7 @@ function RobotsSettings({
             id="InputSimulationTime"
             label="сек"
             value={values.simulationTime | 0}
-            setValue={(v) => setValue('simulationTime', v)}
+            setValue={(v) => setValue('simulationTime', v)} // Назначение времени симуляции роботов
             scaleName={'Время симуляции'}
             nameAttr={'simulationTime-info'}
           />
@@ -149,8 +151,8 @@ function RobotsSettings({
                 type="submit"
                 onClick={(event) => {
                   event.preventDefault();
-                  setrobotsQnt();
-                  setTimerIsActive((prev) => !prev);
+                  setrobotsQnt(); // Вывод роботов на экран
+                  setTimerIsActive((prev) => !prev); // Запуск таймера
                 }}>
                 {timerIsActive ? <span>Остановить</span> : <span>Запуск</span>}
               </button>
@@ -160,8 +162,8 @@ function RobotsSettings({
                 type="reset"
                 onClick={(event) => {
                   event.preventDefault();
-                  setTimerIsActive(() => false);
-                  clearCircles();
+                  setTimerIsActive(() => false); // Выключение таймера
+                  clearRobots(); // Очистка таймера
                   getRandomInt(360);
                 }}>
                 <span>Сбросить</span>

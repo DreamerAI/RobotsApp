@@ -2,6 +2,7 @@ import './RobotsArea.css';
 import circleSvg from './robot.svg';
 
 function RobotsArea({ robotsQnt }) {
+  // Берутся количество роботов из массива и их параметры, создавая роботов с выбранными параметрами
   const listItems = robotsQnt.map((image, i, item) => (
     <circle
       key={[i]}
@@ -12,6 +13,7 @@ function RobotsArea({ robotsQnt }) {
   ));
 
   return (
+    // defs, pattern , image - Для иконки роботов
     <svg className="robots-area-svg">
       <defs>
         <pattern id="image" x="0%" y="0%" height="100%" width="100%" viewBox="0 0 512 512">

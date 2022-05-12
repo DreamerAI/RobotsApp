@@ -5,8 +5,8 @@ import RobotsParameters from './components/robotsParameters/robotsParameters.js'
 import './Main.css';
 import { useState, useEffect, useRef } from 'react';
 
-// Timer of Robots
-function Timer({ seconds, setTimerIsActive, addValueList, clearCircles }) {
+// Вслывающий таймер
+function Timer({ seconds, setTimerIsActive, addLaunchList }) {
   const [timeLeft, setTimeLeft] = useState(seconds);
   const intervalRef = useRef(); // Add a ref to store the interval id
 
@@ -20,9 +20,8 @@ function Timer({ seconds, setTimerIsActive, addValueList, clearCircles }) {
   useEffect(() => {
     if (timeLeft <= 0) {
       clearInterval(intervalRef.current);
-      addValueList();
-      setTimerIsActive((prev) => !prev);
-      // clearCircles();
+      addLaunchList(); // Отправка результата в Историю запусков
+      setTimerIsActive((prev) => !prev); // Переключатель Таймера
     }
   }, [timeLeft]);
 
@@ -39,10 +38,10 @@ function FirstMenu({
   setValue,
   setTimerIsActive,
   timerIsActive,
-  addValueList,
+  addLaunchList,
   setrobotsQnt,
   robotsQnt,
-  clearCircles,
+  clearRobots,
 }) {
   return (
     <div className="first-menu">
@@ -56,27 +55,28 @@ function FirstMenu({
           setValue={setValue}
           timerIsActive={timerIsActive}
           setTimerIsActive={setTimerIsActive}
-          addValueList={addValueList}
+          addLaunchList={addLaunchList}
           setrobotsQnt={setrobotsQnt}
-          clearCircles={clearCircles}
+          clearRobots={clearRobots}
         />
       </div>
     </div>
   );
 }
 
-function SecondMenu({ setCurrentMenu, values, valueList }) {
+function SecondMenu({ setCurrentMenu, values, launchList }) {
   return (
     <div className="second-menu">
-      <RobotsParameters setCurrentMenu={setCurrentMenu} values={values} valueList={valueList} />
+      <RobotsParameters setCurrentMenu={setCurrentMenu} values={values} launchList={launchList} />
     </div>
   );
 }
 
 function Main() {
-  const [timerIsActive, setTimerIsActive] = useState(false);
-  const [currentMenu, setCurrentMenu] = useState(true);
+  const [timerIsActive, setTimerIsActive] = useState(false); // Текущее состояние Таймера
+  const [currentMenu, setCurrentMenu] = useState(true); // Текущее открытое меню
   const [values, setValues] = useState({
+    // Начальные параметры роботов
     launchName: null,
     robotsType: null,
     diameter: 1,
@@ -85,35 +85,34 @@ function Main() {
     simulationTime: 1,
   });
 
-  const [robotsQnt, setRobotsQnt] = useState([]);
-  const [valueList, setValueList] = useState([]);
+  const [robotsQnt, setRobotsQnt] = useState([]); // Массив из количество роботов с их параметрами
+  const [launchList, setLaunchList] = useState([]); // Количество запусков
 
-  const addValueList = () => {
-    setValueList([values, ...valueList]);
+  // Добавление запуска в Историю всех запусков
+  const addLaunchList = () => {
+    setLaunchList([values, ...launchList]);
   };
 
-  const clearCircles = () => {
+  // Очистка роботов на экране
+  const clearRobots = () => {
     setRobotsQnt([]);
   };
 
   function randomCircle(diameter, maxRadius, circleCenter) {
-    // define random radius or add diameter
-
-    // let radius = minCircle + Math.random() * (maxCircle - minCircle);
+    // Радиус робота
     let radius = diameter / 2;
 
-    // let distFromCenter = radius + Math.random() * (outerRadius - innerRadius - radius * 2);
+    // Рандомная дистанция с центра круга
     let distFromCenter = radius + Math.random() * (maxRadius - radius * 2);
 
-    // define random angle
-
+    // Определить рандомный угол
     let angle = Math.random() * Math.PI * 2;
-    // calculate the x,y of the defined circle
+
+    // Рассчитать x,y определенного круга
     let x = circleCenter + distFromCenter * Math.cos(angle);
     let y = circleCenter + distFromCenter * Math.sin(angle);
 
-    // check this new circle versus all previous random circles for a collision
-
+    // Проверка эотого круга против других рандомных кругов на колизию
     let hit = false;
     for (let i = 0; i < robotsQnt.length; i++) {
       let circle = robotsQnt[i];
@@ -125,22 +124,20 @@ function Main() {
       }
     }
 
-    // if no collision occurred, add this new circle to the existing circles array
-
+    // Если не обнаружено колизии, то добавляем новый круг в существующий круг в массив
     if (!hit) {
-      // let color = randomColor();
-      robotsQnt.push({ cx: x, cy: y, radius: radius, color: 'black' });
+      robotsQnt.push({ cx: x, cy: y, radius: radius });
     }
   }
-
+  // Создание выбранного количество роботов
   function setrobotsQnt() {
     for (let i = 0; i < values.robotsQnt; i++) {
-      let maxRadius = 325;
-      let circleCenter = 325;
+      let maxRadius = 325; // Радиус за который роботы не должны выходить
+      let circleCenter = 325; // Точка центра с которой роботы появляются
       randomCircle(values.diameter, maxRadius, circleCenter);
     }
   }
-
+  // Управления параметрами роботов и обновление данных
   function setValue(key, newValue) {
     /* long version
     const copy = { ... values }; // create copy of state
@@ -155,30 +152,33 @@ function Main() {
   return (
     <div className="App">
       <div style={{ display: currentMenu ? 'block' : 'none' }}>
+        {/* Появление и удаление компнента таймера */}
+
         {timerIsActive ? (
           <Timer
             seconds={values.simulationTime}
             setTimerIsActive={setTimerIsActive}
-            addValueList={addValueList}
-            clearCircles={clearCircles}
+            addLaunchList={addLaunchList}
           />
         ) : (
           ''
         )}
+
         <FirstMenu
           setCurrentMenu={setCurrentMenu}
           values={values}
           setValue={setValue}
           timerIsActive={timerIsActive}
           setTimerIsActive={setTimerIsActive}
-          valueList={valueList}
+          launchList={launchList}
           setrobotsQnt={setrobotsQnt}
           robotsQnt={robotsQnt}
-          clearCircles={clearCircles}
+          clearRobots={clearRobots}
         />
       </div>
+
       <div style={{ display: currentMenu ? 'none' : 'block' }}>
-        <SecondMenu setCurrentMenu={setCurrentMenu} values={values} valueList={valueList} />
+        <SecondMenu setCurrentMenu={setCurrentMenu} values={values} launchList={launchList} />
       </div>
     </div>
   );
